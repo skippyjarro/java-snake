@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Snake.iml" filepath="$PROJECT_DIR$/Snake.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SnakeMaven/SnakeMaven.iml" filepath="$PROJECT_DIR$/SnakeMaven/SnakeMaven.iml" />
     </modules>
   </component>
 </project>
