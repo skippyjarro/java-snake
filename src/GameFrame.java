@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,7 +11,7 @@ public class GameFrame extends JFrame implements ActionListener {
     GameFrame(){
         this.setTitle("Snake");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(600, 600);
+        this.setSize(700, 700);
         //this.setLayout(null);
         this.setResizable(false);
         //this.pack();
@@ -19,7 +20,7 @@ public class GameFrame extends JFrame implements ActionListener {
         restart = new JButton();
         restart.setText("Reset");
         restart.setSize(100, 50);
-        restart.setLocation(250, 400);
+        restart.setLocation(300, 400);
         restart.addActionListener(this);
         panel = new GamePanel();
 
