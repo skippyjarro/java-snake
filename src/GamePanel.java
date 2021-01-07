@@ -1,5 +1,4 @@
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Random;
@@ -17,6 +16,7 @@ public class GamePanel extends JPanel implements ActionListener {
     int applesEaten;
     int appleX;
     int appleY;
+    HighScore highScore = new HighScore();
     char direction = 'R';
     boolean running = false;
     Timer timer;
@@ -63,8 +63,14 @@ public class GamePanel extends JPanel implements ActionListener {
         }
     }
     public void newApple() {
-        appleX = random.nextInt(SCREEN_WIDTH/UNIT_SIZE)*UNIT_SIZE;
-        appleY = random.nextInt(SCREEN_HEIGHT/UNIT_SIZE)*UNIT_SIZE;
+        appleX = random.nextInt(SCREEN_WIDTH / UNIT_SIZE) * UNIT_SIZE;
+        appleY = random.nextInt(SCREEN_HEIGHT / UNIT_SIZE) * UNIT_SIZE;
+        for (int i = bodyParts; i > 0; i--) {
+            if (appleX == x[i] && appleY == y[i]) {
+                newApple();
+                break;
+            }
+        }
     }
     public void move() {
         for (int i=bodyParts; i>0; i--) {
@@ -117,15 +123,23 @@ public class GamePanel extends JPanel implements ActionListener {
         g.setFont(new Font("Ink Free", Font.BOLD, 40));
         FontMetrics metrics1 = getFontMetrics(g.getFont());
         g.drawString("Score: "+applesEaten, (SCREEN_WIDTH - metrics1.stringWidth("Score: "+applesEaten))/2, g.getFont().getSize());
+        //Show high score
+        if (applesEaten > HighScore.highScore) {
+            highScore.setHighScore(applesEaten);
+        }
+        g.setColor(Color.RED);
+        g.setFont(new Font("Ink Free", Font.BOLD, 40));
+        FontMetrics metrics2 = getFontMetrics(g.getFont());
+        g.drawString("High Score: "+HighScore.highScore, (SCREEN_WIDTH - metrics1.stringWidth("High Score: "+HighScore.highScore))/2, 100);
         //Game Over text
         g.setColor(Color.RED);
         g.setFont(new Font("Ink Free", Font.BOLD, 75));
-        FontMetrics metrics2 = getFontMetrics(g.getFont());
-        g.drawString("Game Over", (SCREEN_WIDTH - metrics2.stringWidth("Game Over"))/2, SCREEN_HEIGHT/2);
+        FontMetrics metrics3 = getFontMetrics(g.getFont());
+        g.drawString("Game Over", (SCREEN_WIDTH - metrics3.stringWidth("Game Over"))/2, SCREEN_HEIGHT/2);
         GameFrame.restart.requestFocusInWindow();
 
 
-        };
+        }
 
 
     @Override
