@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -8,11 +7,11 @@ public class GameFrame extends JFrame implements ActionListener {
     static JButton restart;
 
 
-    GameFrame(){
+    GameFrame() {
         this.setTitle("Snake");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(700, 700);
-        //this.setLayout(null);
+        this.setLayout(null);
         this.setResizable(false);
         //this.pack();
         this.setLocationRelativeTo(null);

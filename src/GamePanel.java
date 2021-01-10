@@ -9,7 +9,7 @@ public class GamePanel extends JPanel implements ActionListener {
     static final int SCREEN_HEIGHT = 700;
     static final int UNIT_SIZE = 25;
     static final int GAME_UNITS = (SCREEN_WIDTH*SCREEN_HEIGHT)/UNIT_SIZE;
-    static final int DELAY = 125;
+    static int DELAY = 125;
     final int[] x = new int[GAME_UNITS];
     final int[] y = new int[GAME_UNITS];
     int bodyParts = 6;
@@ -22,12 +22,23 @@ public class GamePanel extends JPanel implements ActionListener {
     Timer timer;
     Random random;
 
-    public GamePanel(){
+    public GamePanel() {
         random = new Random();
         this.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
         this.setBackground(Color.BLACK);
         this.setFocusable(true);
         this.addKeyListener(new MyKeyAdapter());
+        Object[] possibleValues = { "Easy", "Medium", "Hard", "Ridiculous" };
+        Object selectedValue = JOptionPane.showInputDialog(null,
+                "Choose Difficulty", "Input",
+                JOptionPane.INFORMATION_MESSAGE, null,
+                possibleValues, possibleValues[0]);
+        switch (selectedValue.toString()) {
+            case "Easy" -> DELAY = 125;
+            case "Medium" -> DELAY = 75;
+            case "Hard" -> DELAY = 50;
+            case "Ridiculous" -> DELAY = 25;
+        }
         startGame();
 
     }
@@ -130,7 +141,7 @@ public class GamePanel extends JPanel implements ActionListener {
         g.setColor(Color.RED);
         g.setFont(new Font("Ink Free", Font.BOLD, 40));
         FontMetrics metrics2 = getFontMetrics(g.getFont());
-        g.drawString("High Score: "+HighScore.highScore, (SCREEN_WIDTH - metrics1.stringWidth("High Score: "+HighScore.highScore))/2, 100);
+        g.drawString("High Score: "+HighScore.highScore, (SCREEN_WIDTH - metrics2.stringWidth("High Score: "+HighScore.highScore))/2, 100);
         //Game Over text
         g.setColor(Color.RED);
         g.setFont(new Font("Ink Free", Font.BOLD, 75));
